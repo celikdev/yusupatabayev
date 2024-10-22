@@ -1,0 +1,11 @@
+services:
+  app:
+    restart: always
+    build:
+      context: .
+      args:
+        DATABASE_URL: "mongodb+srv://chess:BRd0gfKROEzJQNt3@cluster0.dbmp9ep.mongodb.net/chess"
+        JWT_SECRET: "4HVDHBWLJ51O+ua+vugdt3TJHegQe22zmQ6NoW4wllVFXwO7FT6cxICg8bclK170LMD+kWqv12nTERFwW2HzoA=="
+        NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL: https://chess.vscripts.online
+    ports:
+      - 9090:3000

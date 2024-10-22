@@ -1,0 +1,32 @@
+ARG NODE_VERSION=20.7.0
+
+FROM node:${NODE_VERSION}-alpine as build
+
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+
+ARG JWT_SECRET
+ENV JWT_SECRET=${JWT_SECRET}
+
+ARG NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+ENV NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL=${NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}
+
+WORKDIR /app
+
+COPY ./package.json /app/package.json
+COPY ./package-lock.json /app/package-lock.json
+
+RUN npm ci
+
+COPY . .
+
+RUN npx prisma generate
+
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "start" ]
