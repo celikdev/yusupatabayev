@@ -6,7 +6,14 @@ import {
   WhatsAppIcon,
   YoutubeIcon,
 } from "@/assets/icons";
-import AnalysisBoard from "./components/AnalysisBoard";
+
+const DynamicAnalysisBoard = dynamic(
+  () => import("@/app/components/AnalysisBoard"),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
 import Card from "./components/ui/Card";
 import Link from "next/link";
 import Tab from "./components/ui/Tab";
@@ -26,6 +33,7 @@ import Ogrenci5 from "@/assets/carousel/Resim5.jpeg";
 import Ogrenci6 from "@/assets/carousel/Resim6.jpeg";
 import Ogrenci7 from "@/assets/carousel/Resim7.jpeg";
 import Ogrenci8 from "@/assets/carousel/Resim8.jpeg";
+import dynamic from "next/dynamic";
 
 const Home = () => {
   return (
@@ -143,7 +151,7 @@ const Home = () => {
           <Tab />
         </Card>
         {/* {selectedTab == "AnalysisBoard" ? <AnalysisBoard /> : <About />} */}
-        <AnalysisBoard />
+        <DynamicAnalysisBoard />
       </div>
     </main>
   );
