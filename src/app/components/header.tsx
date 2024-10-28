@@ -24,7 +24,7 @@ export default function Header() {
 
   return (
     <div className="flex p-3 px-10 justify-between items-center bg-zinc-300">
-      <Link href="/game">Oyunlar</Link>
+      <Link href="/game">Oyun</Link>
 
       <div className="flex gap-10 items-center">
         {data?.admin && (

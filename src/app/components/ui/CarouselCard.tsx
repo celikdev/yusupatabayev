@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 interface CarouselCardProps {
-  source: string;
+  source: any;
 }
 
 const CarouselCard = ({ source }: CarouselCardProps) => {
