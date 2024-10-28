@@ -89,7 +89,7 @@ const Home = () => {
             />
           </Card>
         </div>
-        <div className="flex gap-4 w-full md:h-[30%] h-max">
+        <div className="flex gap-4 w-full md:h-[36%] h-max">
           <Card className="w-[100%] h-[100%] flex flex-col gap-4">
             <span className="flex justify-between w-full">
               <h1 className="font-extrabold md:text-3xl text-white/80">
@@ -97,23 +97,40 @@ const Home = () => {
               </h1>
             </span>
             <div className="w-full h-full">
-              <p className="text-white/70 md:text-base text-sm">
-                Merhabalar ben Muhammet Ali YURTSEVEN,24 yaşındayım 5 yaşımdan
-                beri yarı aktif (son 4 sene tam aktif olmak üzere) satranç
-                oynuyorum. 8-11 yaş arası il birinciliğim ve bir kaç kez de il
-                derecelerim var. Bir çok oyuncunun yardımcı antrenörlüğüne
-                başladım. Elde ettiğim deneyimlerim ve hazırlıklarımla 2021-2022
-                seneleri arasında antrenörlük dersi ve staj görevi yaptım 2022
-                yılından beri aktif olarak ders vermekteyim. 1000 -1500 arası
-                öğrenciler ile çalışıyorum ve bu seviye arası ile çalışmaktan
-                keyif alıyorum. Genelde ilk hedefim öğrencimi 1 sene içerisinde
-                iyi bir seviyeye getirip üst kademe antrenörler yardımı ile
-                Türkiye satrancına katmak.
+              <p className="text-white/70 md:text-xs text-xs">
+                Yusup Atabayev, 5 Kasım 1994 tarihinde Aşkabat, Türkmenistan’da
+                doğdu. Satrançla 5 yaşında tanıştı ve satranç alanında
+                Büyükusta, FIDE Antrenörü ve FIDE Hakemi unvanlarına sahip.
+                2012-2017 yılları arasında Türkmenistan Milli Spor ve Turizm
+                Enstitüsü'nden “Üst Düzey Spor Antrenörü” olarak mezun oldu.
+                2019 yılında ise profesyonel antrenörlük kariyerine başladı.
+                <br />
+                Satrançtaki Başarıları
+                <br /> 2010: FIDE Ustası (FM) unvanını kazandı. 2012:
+                Uluslararası Usta (IM) unvanını elde etti. 2023: Büyükusta (GM)
+                unvanına yükseldi. Maksimum Elo: 2516 2010: 17 yaş altı Dünya
+                Okullar Şampiyonası’nda genel kategoride 3. oldu. 2015: Merkezi
+                Asya Şampiyonası’nda 2. sırada yer aldı. 2017: Asya Takım
+                Şampiyonası’nda takımıyla 3. oldu. 2024: Türkiye 2. Ligi’nde
+                Resul Caner Akademi Spor Kulübü ile birinci masada takım olarak
+                şampiyonluk yaşadı. Açık turnuvalarda sayısız şampiyonluk ve
+                dereceler elde etti.
+                <br /> Antrenörlükteki Başarıları <br />
+                2020-2024: Türkiye Küçükler ve Yıldızlar Şampiyonalarında birçok
+                şampiyonluk, derece ve millî takım sporcuları yetiştirdi. 2024:
+                Fatma Yılmaz Akademi Spor Kulübü öğrencileri ile Türkiye
+                Küçükler ve Yıldızlar Takım Şampiyonası’nda U12 takım
+                şampiyonluğu. 2024: Fatma Yılmaz Akademi Spor Kulübü öğrencileri
+                ile Avrupa Takımlar Şampiyonası’nda U12 kategorisinde Avrupa
+                ikinciliği. 2024: Fatma Yılmaz Akademi Spor Kulübü ile Türkiye
+                Kulüpler Takım Şampiyonası’nda ikincilik. Yusup Atabayev,
+                satranç sporunda ve antrenörlükte sayısız başarıya imza atarak
+                bu alanda önemli bir kariyer sürdürmektedir.
               </p>
             </div>
           </Card>
         </div>
-        <div className="flex md:h-[40%] h-[20%] gap-4">
+        <div className="flex md:h-[34%] h-[20%] gap-4">
           <Card className="w-[60%] h-full flex flex-row items-center justify-center ">
             <Carousel
               transition={0.5}
