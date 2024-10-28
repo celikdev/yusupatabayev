@@ -16,8 +16,8 @@ export default function Procider({ children }: { children: React.ReactNode }) {
   // const url = "http://localhost:3000/api/trpc";
 
   const url = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
-    ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
-    : "http://localhost:3000/api/trpc";
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}/api/trpc`
+    : "http://localhost:3000/api/trpc/";
 
   const [trpcClient] = useState(() =>
     trpc.createClient({
