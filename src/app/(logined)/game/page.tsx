@@ -65,15 +65,18 @@ export default function Page() {
   return (
     <div className="flex flex-col items-center gap-1">
       {!error && data && (
-        <span>
-          Doğru{" "}
-          <span className="font-bold text-purple-600">
-            {Math.ceil((data.befores.length - index) / 2)}
-          </span>{" "}
-          hamle oynayın!
-        </span>
+        <>
+          <span>{data.description}</span>
+          <span>
+            Doğru{" "}
+            <span className="font-bold text-purple-600">
+              {Math.ceil((data.befores.length - index) / 2)}
+            </span>{" "}
+            hamle oynayın!
+          </span>
+        </>
       )}
-      <div className="w-[600px] h-[600px] flex items-center justify-center">
+      <div className="flex items-center justify-center">
         {isLoading && (
           <LoaderCircle className="animate-spin mx-auto" size="3rem" />
         )}
@@ -83,7 +86,7 @@ export default function Page() {
           </span>
         )}
         {!isLoading && !error && data && (
-          <div className="flex">
+          <div className="flex flex-col gap-4">
             <Chessground
               height={600}
               width={600}

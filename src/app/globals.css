@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.main{
+  @apply bg-primary  antialiased
+}
+
 @layer base {
   .CollapsibleContent[data-state="open"] {
     animation: slideDown 400ms ease-out;

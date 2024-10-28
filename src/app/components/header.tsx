@@ -24,9 +24,9 @@ export default function Header() {
 
   return (
     <div className="flex p-3 px-10 justify-between items-center bg-zinc-300">
-      <Link href="/game">Chess</Link>
+      <Link href="/game">Oyunlar</Link>
 
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-10 items-center">
         {data?.admin && (
           <>
             <Link href="/users">Kullanıcılar</Link>

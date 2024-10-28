@@ -7,8 +7,12 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Chess",
-  description: "Chess app",
+  title: "Yusup Atabayev",
+  description: "Yusup Atabayev - Chess Quiz App",
+  authors: {
+    name: "celikdev",
+    url: "https://celik.dev",
+  },
 };
 
 export default function RootLayout({

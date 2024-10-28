@@ -198,55 +198,61 @@ export const appRouter = t.router({
       }),
     updateGame: adminProcedure
       .input(gameUpdateInput)
-      .mutation(async ({ input: { id, pgn, description, questions } }) => {
-        try {
-          const game = await prisma.game.findFirstOrThrow({
-            where: { id },
-            include: {
-              Question: true,
-            },
-          });
+      .mutation(
+        async ({ input: { id, pgn, description, questions, difficulty } }) => {
+          try {
+            const game = await prisma.game.findFirstOrThrow({
+              where: { id },
+              include: {
+                Question: true,
+              },
+            });
 
-          if (pgn !== game.pgn) {
-            await prisma.question.deleteMany({ where: { gameId: game.id } }); // ! UNUTMA
-            game.Question = [];
-          }
-
-          const dont_delete_questions = [];
-
-          for (const question of questions || []) {
-            const Question = game.Question.find(
-              (x) => x.moves + "" === question + ""
-            );
-
-            if (Question) {
-              dont_delete_questions.push(Question.id);
-              continue;
+            if (pgn !== game.pgn) {
+              await prisma.question.deleteMany({ where: { gameId: game.id } }); // ! UNUTMA
+              game.Question = [];
             }
 
-            const new_question = await newQuestion(game.id, pgn, question);
-            dont_delete_questions.push(new_question.id);
+            const dont_delete_questions = [];
+
+            for (const question of questions || []) {
+              const Question = game.Question.find(
+                (x) => x.moves + "" === question + ""
+              );
+
+              if (Question) {
+                dont_delete_questions.push(Question.id);
+                continue;
+              }
+
+              const new_question = await newQuestion(game.id, pgn, question);
+              dont_delete_questions.push(new_question.id);
+            }
+
+            await prisma.question.deleteMany({
+              where: { gameId: game.id, id: { notIn: dont_delete_questions } },
+            });
+
+            const updated = await prisma.game.update({
+              where: { id },
+              data: {
+                pgn: pgn.trim(),
+                description: description?.trim(),
+                questions,
+                difficulty,
+              },
+            });
+
+            return { id: updated.id };
+          } catch (error: any) {
+            console.error(error);
+            throw new TRPCError({
+              code: "BAD_REQUEST",
+              message: error.message,
+            });
           }
-
-          await prisma.question.deleteMany({
-            where: { gameId: game.id, id: { notIn: dont_delete_questions } },
-          });
-
-          const updated = await prisma.game.update({
-            where: { id },
-            data: {
-              pgn: pgn.trim(),
-              description: description?.trim(),
-              questions,
-            },
-          });
-
-          return { id: updated.id };
-        } catch (error: any) {
-          console.error(error);
-          throw new TRPCError({ code: "BAD_REQUEST", message: error.message });
         }
-      }),
+      ),
     getGame: adminProcedure.input(idInput).query(async ({ input: { id } }) => {
       try {
         const game = await prisma.game.findFirstOrThrow({ where: { id } });
@@ -276,7 +282,7 @@ export const appRouter = t.router({
           });
 
           return games.count;
-        } catch (error) {}
+        } catch (error) { }
       }),
   },
   question: {
@@ -309,7 +315,20 @@ export const appRouter = t.router({
               befores[i] = currentAnswer.answers[i];
             }
 
-            return { ...currentAnswer, afters: undefined, befores };
+            const question = await prisma.question.findFirst({
+              where: { id: currentAnswer.questionId },
+            });
+
+            const game = await prisma.game.findFirst({
+              where: { id: question?.gameId },
+            });
+
+            return {
+              ...currentAnswer,
+              afters: undefined,
+              befores,
+              description: game?.description,
+            };
           }
 
           const user = await prisma.user.findFirstOrThrow({
@@ -328,6 +347,10 @@ export const appRouter = t.router({
             },
           });
 
+          const game = await prisma.game.findFirst({
+            where: { id: question?.gameId },
+          });
+
           const answer = await prisma.answer.create({
             data: {
               questionId: question.id,
@@ -340,7 +363,12 @@ export const appRouter = t.router({
           const befores = new Array(answer.befores.length).fill("");
           befores[0] = answer.befores[0];
 
-          return { ...answer, afters: undefined, befores };
+          return {
+            ...answer,
+            afters: undefined,
+            befores,
+            description: game?.description,
+          };
         } catch (error: any) {
           throw new TRPCError({ code: "BAD_REQUEST", message: error.message });
         }
@@ -370,11 +398,11 @@ export const appRouter = t.router({
 
             const last_answer = answer.afters[answer.answers.length]
               ? await prisma.answer.update({
-                  where: { id, userId },
-                  data: {
-                    answers: { push: answer.afters[answer.answers.length] },
-                  },
-                })
+                where: { id, userId },
+                data: {
+                  answers: { push: answer.afters[answer.answers.length] },
+                },
+              })
               : answer;
 
             if (last_answer.answers.length === last_answer.afters.length) {
