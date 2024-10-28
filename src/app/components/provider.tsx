@@ -13,9 +13,9 @@ export default function Procider({ children }: { children: React.ReactNode }) {
       })
   );
 
-  const url = "http://localhost:3000/api/trpc";
+  // const url = "http://localhost:3000/api/trpc";
 
-  // const url = "https://yusupatabayev.com/api/trpc";
+  const url = "https://yusupatabayev.com/api/trpc";
 
   const [trpcClient] = useState(() =>
     trpc.createClient({
