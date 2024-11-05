@@ -23,10 +23,10 @@ export default function Header() {
   }
 
   return (
-    <div className="flex p-3 px-10 justify-between items-center bg-zinc-300">
+    <div className="flex p-3 md:px-10 justify-between items-center bg-zinc-300">
       <Link href="/game">Oyun</Link>
 
-      <div className="flex gap-10 items-center">
+      <div className="flex md:flex-row flex-col md:gap-10 items-center text-sm md:text-base">
         {data?.admin && (
           <>
             <Link href="/users">Kullanıcılar</Link>

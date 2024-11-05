@@ -26,25 +26,25 @@ export default function Page() {
 
   return (
     <div className="flex w-screen h-screen items-center justify-center">
-      <div className="flex flex-col w-[500px] gap-5 border rounded-md p-5">
-        <span className="mx-auto text-xl font-bold">Login</span>
+      <div className="flex flex-col w-[500px] gap-5 border rounded-md p-5 mx-4">
+        <span className="mx-auto text-xl font-bold">Giriş Yap</span>
         {error && <span className="text-red-500 mx-auto">{error.message}</span>}
         {isPending && (
           <LoaderCircle className="animate-spin mx-auto" size="1.5rem" />
         )}
         <Input
-          placeholder="username"
+          placeholder="Kullanıcı Adı"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <Input
-          placeholder="password"
+          placeholder="Şifre"
           value={password}
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button className="w-fit ml-auto" onClick={handleLogin}>
-          Submit
+          Giriş Yap
         </Button>
       </div>
     </div>

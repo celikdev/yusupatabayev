@@ -62,6 +62,9 @@ export default function Page() {
     return dests;
   };
 
+  const responsiveWidth = window.innerWidth > 768 ? 680 : 320;
+  const responsiveHeight = window.innerWidth > 768 ? 680 : 320;
+
   return (
     <div className="flex flex-col items-center gap-1">
       {!error && data && (
@@ -86,10 +89,10 @@ export default function Page() {
           </span>
         )}
         {!isLoading && !error && data && (
-          <div className="flex flex-col gap-4">
+          <div className="w-[100%] flex flex-col items-center justify-center gap-4">
             <Chessground
-              height={600}
-              width={600}
+              width={responsiveWidth}
+              height={responsiveHeight}
               config={{
                 orientation: getOrientation(),
                 turnColor: chess.turn() === "w" ? "white" : "black",
