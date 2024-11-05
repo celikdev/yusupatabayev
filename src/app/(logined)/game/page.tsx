@@ -5,9 +5,14 @@ import { trpc } from "@/trpc";
 import { Chess, SQUARES, Square } from "chess.js";
 import { useEffect, useReducer, useState } from "react";
 import Chessground from "@react-chess/chessground";
+const DynamicChessGround = dynamic(() => import("@react-chess/chessground"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
 
 export default function Page() {
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -90,7 +95,7 @@ export default function Page() {
         )}
         {!isLoading && !error && data && (
           <div className="w-[100%] flex flex-col items-center justify-center gap-4">
-            <Chessground
+            <DynamicChessGround
               width={responsiveWidth}
               height={responsiveHeight}
               config={{
