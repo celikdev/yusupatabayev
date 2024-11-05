@@ -67,8 +67,13 @@ export default function Page() {
     return dests;
   };
 
-  const responsiveWidth = window.innerWidth > 768 ? 680 : 320;
-  const responsiveHeight = window.innerWidth > 768 ? 680 : 320;
+  const [responsiveWidth, setResponsiveWidth] = useState(320);
+  const [responsiveHeight, setResponsiveHeight] = useState(320);
+
+  useEffect(() => {
+    setResponsiveWidth(window.innerWidth > 768 ? 680 : 320);
+    setResponsiveHeight(window.innerWidth > 768 ? 680 : 320);
+  }, [global?.window]);
 
   return (
     <div className="flex flex-col items-center gap-1">
