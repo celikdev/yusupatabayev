@@ -43,7 +43,7 @@ const Home = () => {
           <div className="flex flex-col gap-4 w-[60%] h-[100%]">
             <Card className="w-[100%] h-[100%] flex items-center justify-center">
               <h1 className="text-white font-extrabold md:text-4xl text-lg text-center">
-                Yusup Atabayev
+                GM Yusup Atabayev
               </h1>
             </Card>
             <Card className="w-[100%] flex items-center justify-center sm:gap-6 md:gap-8 gap-4">
